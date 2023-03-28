@@ -1,11 +1,16 @@
 package org.example;
 
+
 public class BankAccount {
         private String firstName;
         private String lastName;
         private String dateOfBirth;
         private int accountNumber;
-        private int accountBalance;
+        private double accountBalance;
+        private double accountDurationInYears;
+        private double simpleInterest;
+        private double accountBalanceInterestAdded;
+
 
         public BankAccount(String inputFirstName, String inputLastName, String inputDateOfBirth){
                 this.firstName = inputFirstName;
@@ -13,6 +18,9 @@ public class BankAccount {
                 this.dateOfBirth = inputDateOfBirth;
                 this.accountNumber = 0;
                 this.accountBalance = 0;
+                this.accountDurationInYears = 3;
+                this.simpleInterest = getSimpleInterest();
+                this.accountBalanceInterestAdded = balanceInterestAdded();
         }
 
 
@@ -23,7 +31,7 @@ public class BankAccount {
         public String getDateOfBirth(){return this.dateOfBirth;}
 
         public int getAccountNumber(){return this.accountNumber;}
-        public int getAccountBalance(){return this.accountBalance;}
+        public double getAccountBalance(){return this.accountBalance;}
 
         public void setFirstName(String firstName){
 //      run check for authorisation
@@ -40,13 +48,12 @@ public class BankAccount {
 
 //        Deposit
 
-        public int deposit(int amount){
-                int newBalance = this.accountBalance + amount;
-                return newBalance;
+        public void deposit(double amount){
+                accountBalance += amount;
         }
 
 //        Withdrawal
-        public boolean withdrawal(int amount){
+        public boolean withdrawal(double amount){
                 if(this.accountBalance >= amount){
                         this.accountBalance -= amount;
                         System.out.println("Successful withdrawal, remaining balance " + accountBalance);
@@ -55,5 +62,20 @@ public class BankAccount {
                         System.out.println("Error insufficient balance, available balance " + accountBalance);
                         return false;
                 }
+        }
+
+//        Simple interest
+        public double getSimpleInterest(){
+                double rate = 0.5;
+                // Calculating the simple interest
+                double simpleInterest = (this.accountBalance * rate * this.accountDurationInYears) / 100;
+                // Displaying the simple interest
+                System.out.println("Simple Interest = " + simpleInterest);
+                return rate;
+        }
+
+        public double balanceInterestAdded(){
+                accountBalanceInterestAdded = this.accountBalance + this.simpleInterest;
+                return accountBalanceInterestAdded;
         }
 }
