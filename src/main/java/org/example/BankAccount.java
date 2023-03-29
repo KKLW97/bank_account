@@ -65,14 +65,15 @@ public class BankAccount {
         }
 
 //        Simple interest
-        public double getSimpleInterest(){
+        public double getSimpleInterest() {
                 double rate = 0.5;
                 // Calculating the simple interest
                 double simpleInterest = (this.accountBalance * rate * this.accountDurationInYears) / 100;
                 // Displaying the simple interest
                 System.out.println("Simple Interest = " + simpleInterest);
-                return rate;
+                return simpleInterest;
         }
+
 
         public double balanceInterestAdded(){
                 accountBalanceInterestAdded = this.accountBalance + this.simpleInterest;
